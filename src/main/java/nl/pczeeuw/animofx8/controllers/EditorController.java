@@ -7,17 +7,19 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import nl.pczeeuw.animofx8.domain.RectangleDrawEvent;
+import nl.pczeeuw.animofx8.services.ImageService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,17 +41,17 @@ public class EditorController {
     @FXML
     MenuBar menuBar;
 
-    @FXML
-    MenuItem menuItemOpen;
+    private Image origImg;
 
-    Image origImg;
+    private String origFilePath;
 
-    String origUrl;
+    private RectangleDrawEvent currentEvent;
+    private List<RectangleDrawEvent> drawEvents;
 
-    RectangleDrawEvent currentEvent;
-    List<RectangleDrawEvent> drawEvents;
+    private List<Canvas> canvasList;
 
-    List<Canvas> canvasList;
+    @Autowired
+    ImageService imageService;
 
 
 //    public EditorController (File file) {
@@ -67,7 +69,7 @@ public class EditorController {
         editCanvas.setHeight(origImg.getHeight() + 25);
         editCanvas.setWidth(origImg.getWidth());
         menuBar.setPrefWidth(image.getWidth());
-        origUrl = url;
+        origFilePath = url;
 
         drawEvents = new ArrayList<>();
         canvasList = new ArrayList<>();
@@ -79,6 +81,10 @@ public class EditorController {
             removeLastDrawingEvent();
         }
         });
+
+        if (imageService == null) {
+            this.imageService = new ImageService();
+        }
     }
 
     public void dragEntered(MouseEvent mouseEvent) {
@@ -92,10 +98,6 @@ public class EditorController {
         log.info("Drag exited: " + mouseEvent.getSceneX() + ":" + mouseEvent.getSceneY());
 //        log.info(mouseEvent.toString());
 
-    }
-
-    public void action(ActionEvent actionEvent) {
-        log.info("TEst");
     }
 
     private void drawDragEventToNewCanvas(RectangleDrawEvent drawEvent) {
@@ -155,4 +157,39 @@ public class EditorController {
         this.currentEvent = new RectangleDrawEvent((int) mouseEvent.getSceneX(), (int) mouseEvent.getSceneY() - 25);
     }
 
+    public void saveImage(ActionEvent actionEvent) {
+        Image imgToWrite = writeEventsToImage();
+        log.info("URL is: " + this.origFilePath);
+        imageService.saveToFile(imgToWrite,this.origFilePath);
+    }
+
+    public void saveImageAs(ActionEvent actionEvent) {
+    }
+
+    private Image writeEventsToImage () {
+        WritableImage wImg = new WritableImage(origImg.getPixelReader(), (int) origImg.getWidth(), (int) origImg.getHeight());
+        PixelWriter writer = wImg.getPixelWriter();
+
+        for (RectangleDrawEvent event: drawEvents) {
+            writeEventToImage(event, writer);
+        }
+
+        return wImg;
+    }
+
+    private void writeEventToImage(RectangleDrawEvent event, PixelWriter writer) {
+        for (int i = event.getStartingX(); i < event.getStartingX() + event.getWidthX(); i++) {
+            for (int j = event.getStartingY(); j < event.getStartingY()+ event.getHeightY(); j++) {
+                writer.setColor(i, j, Color.BLACK);
+            }
+        }
+    }
+
+    public void quit(ActionEvent actionEvent) {
+        Stage stage = (Stage) this.editorPane.getScene().getWindow();
+        stage.close();
+    }
+
+    public void revert(ActionEvent actionEvent) {
+    }
 }

@@ -15,41 +15,20 @@
          <menus>
             <Menu mnemonicParsing="false" text="File">
                <items>
-                  <MenuItem fx:id="menuItemOpen" mnemonicParsing="false" onAction="#action" text="New" />
-                  <MenuItem mnemonicParsing="false" text="Open…" />
-                  <Menu mnemonicParsing="false" text="Open Recent" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveImage" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveImageAs" text="Save As…" />
+                  <MenuItem mnemonicParsing="false" onAction="#revert" text="Revert" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
-                  <MenuItem mnemonicParsing="false" text="Save As…" />
-                  <MenuItem mnemonicParsing="false" text="Revert" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Preferences…" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Quit" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Undo" />
-                  <MenuItem mnemonicParsing="false" text="Redo" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Cut" />
-                  <MenuItem mnemonicParsing="false" text="Copy" />
-                  <MenuItem mnemonicParsing="false" text="Paste" />
-                  <MenuItem mnemonicParsing="false" text="Delete" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Select All" />
-                  <MenuItem mnemonicParsing="false" text="Unselect All" />
+                  <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                  <MenuItem mnemonicParsing="false" text="Over AnimoFx8" />
                </items>
             </Menu>
          </menus>
       </MenuBar>
-      <Canvas fx:id="editCanvas" layoutY="25.0" onMouseClicked="#mouseClicked" onMouseDragged="#dragDetected" onMouseEntered="#dragEntered" onMouseExited="#dragExited" onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" />
+      <Canvas fx:id="editCanvas" layoutY="25.0" onMouseClicked="#mouseClicked" onMouseEntered="#dragEntered" onMouseExited="#dragExited" onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" />
    </children>
 </Pane>

@@ -1,5 +1,6 @@
 package nl.pczeeuw.animofx8.services;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -12,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,19 +43,16 @@ public class ImageService {
         List<File> result = new ArrayList<>();
 
         for (File file : files) {
-            if (file.getName().contains(".")) {
-                String extension = file.getName().substring(file.getName().lastIndexOf(".") + 1);
-                if (Arrays.asList(allowedImgExtensions).contains(extension)) {
-                    result.add(file);
-                }else if (file.getName().toLowerCase().endsWith("pdf")) {
-                    log.info("Pdf detected");
-                    result.addAll(pdfToImageFile(file));
-                } else {
-                    log.error(extension + " is geen valide extensie");
-                }
+            String extension = getFileExtension(file.getName()).toLowerCase();
+            if (Arrays.asList(allowedImgExtensions).contains(extension)) {
+                result.add(file);
+            } else if (file.getName().toLowerCase().endsWith("pdf")) {
+                log.info("Pdf detected");
+                result.addAll(pdfToImageFile(file));
             } else {
-                log.error("File heeft geen extensie");
+                log.error(extension + " is geen valide extensie");
             }
+
         }
         return result;
     }
@@ -69,14 +68,55 @@ public class ImageService {
                 BufferedImage bim = renderer.renderImageWithDPI(page, 300, ImageType.RGB);
 
                 // suffix in filename will be used as the file format
-                File tmpFile = new File(pdfFile.getAbsolutePath() + page + ".png");
-                ImageIO.write(bim, pdfFile.getName() + ".png", tmpFile);
+                File tmpFile = new File(pdfFile.getAbsolutePath() + "_" + page + ".jpeg");
+                if (!tmpFile.exists()) {
+                    tmpFile.createNewFile();
+                }
+                ImageIO.write(bim, "JPEG", tmpFile);
                 result.add(tmpFile);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return result;
+    }
+
+    private String getFileExtension(String fileName) {
+        String result ="";
+        if (fileName.contains(".")) {
+            result = fileName.substring(fileName.lastIndexOf(".") + 1);
+//            if (result.contains("jpg")) {
+//                return result.replaceAll("jpg","png");
+//            } else {
+//                return result;
+//            }
+        } else {
+            log.info("No extension found!");
+        }
+        return result;
+    }
+
+    public boolean saveToFile(Image image, String fullPath) {
+        File outputFile = new File(getFilePath(fullPath) + File.separator +  "_" + getFileName(fullPath));
+        log.info("New file path: " + outputFile.getAbsolutePath());
+        BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+        try {
+            ImageIO.write(bImage, getFileExtension(outputFile.getName()) , outputFile);
+            return true;
+        } catch (IOException e) {
+            log.error("Er is iets misgegaan bij het wegschrijven van file " + outputFile.getAbsolutePath());
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String getFileName (String fullFilePath) {
+        String filename = Paths.get(fullFilePath).getFileName().toString();
+
+        return filename.replaceAll(getFileExtension(filename),"png");
+    }
+
+    private String getFilePath ( String fullFilePath) {
+        return Paths.get(fullFilePath).getParent().toString();
     }
 
 

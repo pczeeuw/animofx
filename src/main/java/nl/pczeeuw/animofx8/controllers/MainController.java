@@ -1,44 +1,31 @@
 package nl.pczeeuw.animofx8.controllers;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lombok.extern.slf4j.Slf4j;
-import nl.pczeeuw.animofx8.Animofx8Application;
-import nl.pczeeuw.animofx8.services.AwesomeActionService;
 import nl.pczeeuw.animofx8.services.ImageService;
-import nl.pczeeuw.animofx8.views.EditorView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import sun.applet.Main;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @FXMLController
 @Slf4j
@@ -195,11 +182,6 @@ public class MainController {
 
             Stage stage = new Stage(StageStyle.DECORATED);
             Scene scene = new Scene(loader.load());
-//            stage.setScene(
-//                    new Scene(
-//                            (Pane) loader.load()
-//                    )
-//            );
             stage.setScene(scene);
 
             EditorController controller = loader.getController();
