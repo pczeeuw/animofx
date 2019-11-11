@@ -30,11 +30,15 @@ public class RectangleDrawEvent {
     }
 
     public int getWidthX () {
-        return abs(xStart - yStart);
+        return abs(xStart - xExit);
     }
 
     public int getHeightY () {
         return abs(yStart - yExit);
+    }
+
+    public String toString () {
+        return String.format("Position start : [%d - %d] Position exit: [%d - %d] Size: [%d - %d]", getStartingX(), getStartingY(),getXExit(),getYExit(), getWidthX(), getHeightY());
     }
 
 }

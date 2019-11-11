@@ -194,17 +194,19 @@ public class MainController {
             loader = new FXMLLoader(new ClassPathResource("fxml/editor.fxml").getURL());
 
             Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setScene(
-                    new Scene(
-                            (Pane) loader.load()
-                    )
-            );
+            Scene scene = new Scene(loader.load());
+//            stage.setScene(
+//                    new Scene(
+//                            (Pane) loader.load()
+//                    )
+//            );
+            stage.setScene(scene);
 
             EditorController controller = loader.getController();
 
             Image image = imageService.fileToImage(file);
             if (image != null) {
-                controller.initPage(image, file.getAbsolutePath());
+                controller.initPage(scene, image, file.getAbsolutePath());
                 stage.setTitle(file.getName());
                 stage.show();
             } else {
