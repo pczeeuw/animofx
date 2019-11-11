@@ -72,21 +72,13 @@ public class EditorController {
         drawEvents = new ArrayList<>();
         canvasList = new ArrayList<>();
 
+        // Zelf keypresed event toevoegen aan rootpane. Anders doet ie het neit :(
         root.setOnKeyPressed(event -> {
-//        log.info("Key pressed!");
         if (event.isControlDown() && event.getCode() == KeyCode.Z) {
             log.info("Ctrl-z presed");
             removeLastDrawingEvent();
         }
         });
-//            imgView.set
-    }
-
-
-    public void dragDetected(MouseEvent mouseEvent) {
-
-
-//        log.info("Drag detected: " + mouseEvent.getSceneX() + ":" + mouseEvent.getSceneY());
     }
 
     public void dragEntered(MouseEvent mouseEvent) {
@@ -139,7 +131,6 @@ public class EditorController {
             canvas.toBack();
             editorPane.getChildren().remove(canvas);
             drawEvents.remove(drawEvents.size() - 1);
-//            editorPane.
             log.info("DrawEvent remvoed");
         }
 
@@ -164,11 +155,4 @@ public class EditorController {
         this.currentEvent = new RectangleDrawEvent((int) mouseEvent.getSceneX(), (int) mouseEvent.getSceneY() - 25);
     }
 
-    @FXML
-    public void keyPressed(KeyEvent keyEvent) {
-        log.info("key pressd: " + keyEvent.getCharacter());
-        if (keyEvent.isControlDown() && keyEvent.getCharacter().equals("c")) {
-            log.info(" ctr- Key pressed!");
-        }
-    }
 }
