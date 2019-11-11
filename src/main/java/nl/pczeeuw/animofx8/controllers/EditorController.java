@@ -3,6 +3,7 @@ package nl.pczeeuw.animofx8.controllers;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -15,6 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import nl.pczeeuw.animofx8.domain.RectangleDrawEvent;
@@ -64,11 +66,8 @@ public class EditorController {
         this.root = root;
         origImg = image;
         imgView.setImage(origImg);
-        editorPane.setPrefHeight(origImg.getHeight() + 25);
-        editorPane.setPrefWidth(origImg.getWidth());
-        editCanvas.setHeight(origImg.getHeight() + 25);
-        editCanvas.setWidth(origImg.getWidth());
-        menuBar.setPrefWidth(image.getWidth());
+        setWindowSize();
+
         origFilePath = url;
 
         drawEvents = new ArrayList<>();
@@ -85,6 +84,14 @@ public class EditorController {
         if (imageService == null) {
             this.imageService = new ImageService();
         }
+    }
+
+    private void setWindowSize() {
+        editorPane.setPrefHeight(origImg.getHeight() + 25);
+        editorPane.setPrefWidth(origImg.getWidth());
+        editCanvas.setHeight(origImg.getHeight() + 25);
+        editCanvas.setWidth(origImg.getWidth());
+        menuBar.setPrefWidth(origImg.getWidth());
     }
 
     public void dragEntered(MouseEvent mouseEvent) {

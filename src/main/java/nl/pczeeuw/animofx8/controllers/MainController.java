@@ -4,6 +4,7 @@ import de.felixroske.jfxsupport.FXMLController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -15,6 +16,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lombok.extern.slf4j.Slf4j;
@@ -187,6 +189,7 @@ public class MainController {
             EditorController controller = loader.getController();
 
             Image image = imageService.fileToImage(file);
+//            image = imageService.scaleImage(image, Screen.getPrimary().getVisualBounds());
             if (image != null) {
                 controller.initPage(scene, image, file.getAbsolutePath());
                 stage.setTitle(file.getName());
@@ -199,6 +202,8 @@ public class MainController {
             e.printStackTrace();
         }
     }
+
+
 
 
 }

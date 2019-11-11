@@ -1,7 +1,9 @@
 package nl.pczeeuw.animofx8.services;
 
 import javafx.embed.swing.SwingFXUtils;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
+import javafx.stage.Screen;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.ImageType;
@@ -27,12 +29,12 @@ public class ImageService {
 
     public List<Image> filesToImages(List<File> files) {
         List<File> filesToProces = checkFiles(files);
-        return files.stream().map(this::fileToImage).collect(Collectors.toList());
+        return filesToProces.stream().map(this::fileToImage).collect(Collectors.toList());
     }
 
     public Image fileToImage(File file) {
         try {
-            return new Image(new FileInputStream(file));
+            return new Image(new FileInputStream(file), Screen.getPrimary().getBounds().getWidth() * 0.75, Screen.getPrimary().getBounds().getHeight() * 0.75, true, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,10 +54,18 @@ public class ImageService {
             } else {
                 log.error(extension + " is geen valide extensie");
             }
-
         }
         return result;
     }
+
+//    public Image scaleImage(Image imgToScale, Rectangle2D maxScreenSize) {
+//
+//
+//    }
+//
+//    private Image scaleImage (Image image, double scale) {
+//        image.
+//    }
 
     private List<File> pdfToImageFile(File pdfFile) {
         List<File> result = new ArrayList<>();
@@ -67,11 +77,11 @@ public class ImageService {
             for (int page = 0; page < doc.getNumberOfPages(); ++page) {
                 BufferedImage bim = renderer.renderImageWithDPI(page, 300, ImageType.RGB);
 
-                // suffix in filename will be used as the file format
                 File tmpFile = new File(pdfFile.getAbsolutePath() + "_" + page + ".png");
                 if (!tmpFile.exists()) {
                     tmpFile.createNewFile();
                 }
+
                 ImageIO.write(bim, "png", tmpFile);
                 result.add(tmpFile);
             }
