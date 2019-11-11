@@ -6,7 +6,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.pczeeuw.animofx8.controllers.MainController">
@@ -51,7 +50,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <Canvas fx:id="canvas" layoutX="14.0" layoutY="78.0" onDragDetected="#drawDragDetected" onMouseClicked="#drawToCanvas" />
-      <BorderPane fx:id="dropPane" layoutX="14.0" layoutY="27.0" onDragDetected="#dropFile" prefHeight="44.0" prefWidth="571.0" />
+      <Canvas fx:id="canvas" layoutX="14.0" layoutY="78.0" onMouseClicked="#drawToCanvas" />
+      <Pane fx:id="dropPane" layoutX="14.0" layoutY="27.0" onDragDetected="#dropFileDetected" onDragDone="#dropFileDone" onDragDropped="#dropFileDropped" onDragEntered="#dropFileEnter" onDragExited="#dropFileExit" onDragOver="#dropFileOver" prefHeight="57.0" prefWidth="573.0" />
     </children>
 </Pane>
