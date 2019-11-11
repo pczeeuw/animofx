@@ -68,30 +68,23 @@ public class EditorController {
 
 
     public void dragDetected(MouseEvent mouseEvent) {
-        log.info("Drag detected");
+
+
+
+//        log.info("Drag detected: " + mouseEvent.getSceneX() + ":" + mouseEvent.getSceneY());
     }
 
-    public void dragDone(DragEvent dragEvent) {
-        log.info("Drag done");
+    public void dragEntered(MouseEvent mouseEvent) {
+        log.info("Drag entered: " + mouseEvent.getSceneX() + ":" + mouseEvent.getSceneY());
+        log.info("Mouse down? " + mouseEvent.isPrimaryButtonDown() + " " + mouseEvent.isSecondaryButtonDown());
+//        log.info(mouseEvent.toString());
+
     }
 
-    public void dragDropped(DragEvent dragEvent) {
-        log.info("Drag dropped");
-    }
+    public void dragExited(MouseEvent mouseEvent) {
+        log.info("Drag exited: " + mouseEvent.getSceneX() + ":" + mouseEvent.getSceneY());
+//        log.info(mouseEvent.toString());
 
-    public void dragEntered(MouseEvent dragEvent) {
-        this.currentEvent = new RectangleDrawEvent((int) dragEvent.getSceneX() + 25, (int) dragEvent.getScreenY());
-        log.info("Drag entered");
-    }
-
-    public void dragExited(MouseEvent dragEvent) {
-        this.currentEvent.setXExit((int) dragEvent.getSceneX() + 25);
-        this.currentEvent.setYExit((int) dragEvent.getScreenY());
-        drawEvents.add(this.currentEvent);
-
-        drawDragEventToCanvas(this.currentEvent);
-
-        log.info("Drag exited");
     }
 
     public void action(ActionEvent actionEvent) {
@@ -102,11 +95,29 @@ public class EditorController {
         log.info("Draw to canvas");
         GraphicsContext g = editCanvas.getGraphicsContext2D();
         g.setFill(Color.BLACK);
-        g.fillRect(drawEvent.getXStart(), drawEvent.getYStart(),drawEvent.getXExit(),drawEvent.getYExit());
-        g.fill();
+        g.fillRect(drawEvent.getStartingX(), drawEvent.getStartingY(), drawEvent.getWidthX(), drawEvent.getHeightY());
+        log.info("Drawed to: " + drawEvent.getStartingX() + ":" + drawEvent.getStartingY() + " WH: " + drawEvent.getWidthX() + ":" + drawEvent.getHeightY());
         editCanvas.toFront();
+
+        drawEvents.add(this.currentEvent);
+        this.currentEvent = null;
+
 
     }
 
 
+    public void mouseClicked(MouseEvent mouseEvent) {
+            this.currentEvent = new RectangleDrawEvent((int) mouseEvent.getSceneX() + 25, (int) mouseEvent.getSceneY());
+            log.info("Setting draw event");
+
+
+    }
+
+    public void mouseReleased(MouseEvent mouseEvent) {
+        if (this.currentEvent != null && this.currentEvent.isActive()) {
+            this.currentEvent.setXExit((int) mouseEvent.getSceneX() + 25);
+            this.currentEvent.setYExit((int) mouseEvent.getSceneY());
+            drawDragEventToCanvas(this.currentEvent);
+        }
+    }
 }
