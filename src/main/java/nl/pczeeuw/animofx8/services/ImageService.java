@@ -62,19 +62,21 @@ public class ImageService {
         PDDocument doc = null;
         try {
             doc = PDDocument.load(pdfFile);
-
             PDFRenderer renderer = new PDFRenderer(doc);
+
             for (int page = 0; page < doc.getNumberOfPages(); ++page) {
                 BufferedImage bim = renderer.renderImageWithDPI(page, 300, ImageType.RGB);
 
                 // suffix in filename will be used as the file format
-                File tmpFile = new File(pdfFile.getAbsolutePath() + "_" + page + ".jpeg");
+                File tmpFile = new File(pdfFile.getAbsolutePath() + "_" + page + ".png");
                 if (!tmpFile.exists()) {
                     tmpFile.createNewFile();
                 }
-                ImageIO.write(bim, "JPEG", tmpFile);
+                ImageIO.write(bim, "png", tmpFile);
                 result.add(tmpFile);
             }
+
+            doc.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
