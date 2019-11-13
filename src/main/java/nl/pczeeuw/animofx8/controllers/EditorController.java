@@ -93,14 +93,14 @@ public class EditorController {
     }
 
     public void dragEntered(MouseEvent mouseEvent) {
-        log.info("Drag entered: " + mouseEvent.getSceneX() + ":" + mouseEvent.getSceneY());
-        log.info("Mouse down? " + mouseEvent.isPrimaryButtonDown() + " " + mouseEvent.isSecondaryButtonDown());
+        log.debug("Drag entered: " + mouseEvent.getSceneX() + ":" + mouseEvent.getSceneY());
+        log.debug("Mouse down? " + mouseEvent.isPrimaryButtonDown() + " " + mouseEvent.isSecondaryButtonDown());
 //        log.info(mouseEvent.toString());
 
     }
 
     public void dragExited(MouseEvent mouseEvent) {
-        log.info("Drag exited: " + mouseEvent.getSceneX() + ":" + mouseEvent.getSceneY());
+        log.debug("Drag exited: " + mouseEvent.getSceneX() + ":" + mouseEvent.getSceneY());
 //        log.info(mouseEvent.toString());
 
     }

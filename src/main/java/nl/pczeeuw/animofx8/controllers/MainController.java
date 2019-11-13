@@ -88,45 +88,21 @@ public class MainController {
         return null;
     }
 
-    public void drawToCanvas(MouseEvent mouseEvent) {
-        log.info("Mouse clicked on canvas! Coordinate screen: " + mouseEvent.getScreenX() + ":" + mouseEvent.getScreenY());
-        log.info("Mouse clicked on canvas! Coordinate scene: " + mouseEvent.getSceneX() + ":" + mouseEvent.getSceneY());
-        log.info("Mouse clicked on canvas! Coordinate: " + mouseEvent.getX() + ":" + mouseEvent.getY());
 
-        int canvasX = (int) mouseEvent.getSceneX() - (int) canvas.getLayoutX();
-        int canvasY = (int) mouseEvent.getSceneY() - (int) canvas.getLayoutY();
-//        GraphicsContext g = canvas.getGraphicsContext2D();
-//        g.setFill(Color.BLACK);
-//        g.fillRect(mouseEvent.getX(),mouseEvent.getY(), 10,10);
-
-//        BufferedImage awtImg = SwingFXUtils.fromFXImage(imgView.getImage(),null);
-//        awtImg.getWritableTile()
-        Image img = imgView.getImage();
-        WritableImage wImg = new WritableImage(img.getPixelReader(), (int) img.getWidth(), (int) img.getHeight());
-        PixelWriter writer = wImg.getPixelWriter();
-
-        for (int i = canvasX; i < canvasX + 10; i++) {
-            for (int j = canvasY; j < canvasY + 10; j++) {
-                writer.setColor(i, j, Color.BLACK);
-            }
-        }
-        imgView.setImage(wImg);
-
-    }
     public void dropFileDetected(MouseEvent mouseEvent) {
-        log.info("detected");
+        log.debug("detected");
     }
 
     public void dropFileDone(DragEvent dragEvent) {
-        log.info("done");
+        log.debug("done");
     }
 
     public void dropFileDropped(DragEvent dragEvent) {
-        log.info("dropped");
+        log.debug("dropped");
     }
 
     public void dropFileEnter(DragEvent dragEvent) {
-        log.info("enter");
+        log.debug("enter");
     }
 
     public void dropFileExit(DragEvent dragEvent) {
