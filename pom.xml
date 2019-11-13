@@ -67,6 +67,17 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>8.8.3</version>
+                <configuration>
+                    <vendor>Pieter</vendor>
+                    <mainClass>nl.pczeeuw.animofx8.Animofx8Application</mainClass>
+                    <jfxAppOutputDir>${project.build.directory}/app</jfxAppOutputDir>
+                    <nativeOutputDir>${project.build.directory}/native</nativeOutputDir>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
