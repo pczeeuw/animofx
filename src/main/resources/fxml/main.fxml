@@ -7,51 +7,44 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.pczeeuw.animofx8.controllers.MainController">
-    <children>
-      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
-         <menus>
-            <Menu mnemonicParsing="false" text="File">
-               <items>
-                  <MenuItem fx:id="menuOpenItem" mnemonicParsing="false" text="New" />
-                  <MenuItem mnemonicParsing="false" onAction="#openImage" text="Open…" />
-                  <Menu mnemonicParsing="false" text="Open Recent" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
-                  <MenuItem mnemonicParsing="false" text="Save As…" />
-                  <MenuItem mnemonicParsing="false" text="Revert" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Preferences…" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Quit" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Undo" />
-                  <MenuItem mnemonicParsing="false" text="Redo" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Cut" />
-                  <MenuItem mnemonicParsing="false" text="Copy" />
-                  <MenuItem mnemonicParsing="false" text="Paste" />
-                  <MenuItem mnemonicParsing="false" text="Delete" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Select All" />
-                  <MenuItem mnemonicParsing="false" text="Unselect All" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
-      <Pane fx:id="dropPane" layoutX="14.0" layoutY="68.0" onDragDetected="#dropFileDetected" onDragDone="#dropFileDone" onDragDropped="#dropFileDropped" onDragEntered="#dropFileEnter" onDragExited="#dropFileExit" onDragOver="#dropFileOver" prefHeight="264.0" prefWidth="573.0">
-         <children>
-            <Label layoutX="248.0" layoutY="124.0" text="Drag and drop" />
-         </children></Pane>
-      <Label fx:id="errorLabel" layoutY="359.0" />
-    </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="nl.pczeeuw.animofx8.controllers.MainController">
+   <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+      <Menu mnemonicParsing="false" text="File">
+         <MenuItem mnemonicParsing="false" text="New"/>
+         <MenuItem mnemonicParsing="false" onAction="#openImage" text="Open…"/>
+         <Menu mnemonicParsing="false" text="Open Recent"/>
+         <SeparatorMenuItem mnemonicParsing="false"/>
+         <MenuItem mnemonicParsing="false" text="Close"/>
+         <MenuItem mnemonicParsing="false" text="Save"/>
+         <MenuItem mnemonicParsing="false" text="Save As…"/>
+         <MenuItem mnemonicParsing="false" text="Revert"/>
+         <SeparatorMenuItem mnemonicParsing="false"/>
+         <MenuItem mnemonicParsing="false" text="Preferences…"/>
+         <SeparatorMenuItem mnemonicParsing="false"/>
+         <MenuItem mnemonicParsing="false" text="Quit"/>
+      </Menu>
+      <Menu mnemonicParsing="false" text="Edit">
+         <MenuItem mnemonicParsing="false" text="Undo"/>
+         <MenuItem mnemonicParsing="false" text="Redo"/>
+         <SeparatorMenuItem mnemonicParsing="false"/>
+         <MenuItem mnemonicParsing="false" text="Cut"/>
+         <MenuItem mnemonicParsing="false" text="Copy"/>
+         <MenuItem mnemonicParsing="false" text="Paste"/>
+         <MenuItem mnemonicParsing="false" text="Delete"/>
+         <SeparatorMenuItem mnemonicParsing="false"/>
+         <MenuItem mnemonicParsing="false" text="Select All"/>
+         <MenuItem mnemonicParsing="false" text="Unselect All"/>
+      </Menu>
+      <Menu mnemonicParsing="false" text="Help">
+         <MenuItem mnemonicParsing="false" text="About MyHelloApp"/>
+      </Menu>
+   </MenuBar>
+   <Pane fx:id="dropPane" layoutX="14.0" layoutY="68.0" onDragDetected="#dropFileDetected" onDragDone="#dropFileDone"
+         onDragDropped="#dropFileDropped" onDragEntered="#dropFileEnter" onDragExited="#dropFileExit"
+         onDragOver="#dropFileOver" prefHeight="264.0" prefWidth="573.0">
+      <Label layoutX="248.0" layoutY="124.0" text="Drag and drop"/>
+   </Pane>
+   <Label fx:id="errorLabel" layoutY="359.0"/>
 </Pane>
