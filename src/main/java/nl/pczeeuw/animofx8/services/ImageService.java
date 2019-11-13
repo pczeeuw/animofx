@@ -74,14 +74,14 @@ public class ImageService {
             PDFRenderer renderer = new PDFRenderer(doc);
 
             for (int page = 0; page < doc.getNumberOfPages(); ++page) {
-                BufferedImage bim = renderer.renderImageWithDPI(page, 300, ImageType.RGB);
+                BufferedImage bim = renderer.renderImageWithDPI(page, 600, ImageType.RGB);
 
-                File tmpFile = new File(pdfFile.getAbsolutePath() + "_" + page + ".png");
+                File tmpFile = new File(getFilePath(pdfFile.getAbsolutePath()) + File.separator + "_" + page + "_" + pdfFile.getName() + ".jpeg");
                 if (!tmpFile.exists()) {
                     tmpFile.createNewFile();
                 }
 
-                ImageIO.write(bim, "png", tmpFile);
+                ImageIO.write(bim, "jpeg", tmpFile);
                 result.add(tmpFile);
             }
 
@@ -111,6 +111,7 @@ public class ImageService {
         File outputFile = new File(getFilePath(fullPath) + File.separator +  "_" + getFileName(fullPath));
         log.info("New file path: " + outputFile.getAbsolutePath());
         BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+        bImage = ensureOpaque(bImage);
         try {
             ImageIO.write(bImage, getFileExtension(outputFile.getName()) , outputFile);
             return true;
@@ -122,13 +123,27 @@ public class ImageService {
 
     private String getFileName (String fullFilePath) {
         String filename = Paths.get(fullFilePath).getFileName().toString();
+        if (filename.startsWith("_")) {
+            filename = filename.replaceFirst("_","");
+        }
 
-        return filename.replaceAll(getFileExtension(filename),"png");
+//        return filename.replaceAll(getFileExtension(filename),"png");
+        return filename;
     }
 
     private String getFilePath ( String fullFilePath) {
         return Paths.get(fullFilePath).getParent().toString();
     }
 
-
+    private BufferedImage ensureOpaque(BufferedImage bi) {
+        if (bi.getTransparency() == BufferedImage.OPAQUE)
+            return bi;
+        int w = bi.getWidth();
+        int h = bi.getHeight();
+        int[] pixels = new int[w * h];
+        bi.getRGB(0, 0, w, h, pixels, 0, w);
+        BufferedImage bi2 = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+        bi2.setRGB(0, 0, w, h, pixels, 0, w);
+        return bi2;
+    }
 }
