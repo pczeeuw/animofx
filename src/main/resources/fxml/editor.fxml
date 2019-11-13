@@ -8,27 +8,21 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="editorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.pczeeuw.animofx8.controllers.EditorController">
-   <children>
-      <ImageView fx:id="imgView" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
-      <MenuBar fx:id="menuBar">
-         <menus>
-            <Menu mnemonicParsing="false" text="File">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#saveImage" text="Save" />
-                  <MenuItem mnemonicParsing="false" onAction="#saveImageAs" text="Save As…" />
-                  <MenuItem mnemonicParsing="false" onAction="#revert" text="Revert" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Over AnimoFx8" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
-      <Canvas fx:id="editCanvas" layoutY="25.0" onMouseClicked="#mouseClicked" onMouseEntered="#dragEntered" onMouseExited="#dragExited" onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" />
-   </children>
+<Pane fx:id="editorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="nl.pczeeuw.animofx8.controllers.EditorController">
+   <ImageView fx:id="imgView" layoutY="25.0" pickOnBounds="true" preserveRatio="true"/>
+   <MenuBar fx:id="menuBar">
+      <Menu mnemonicParsing="false" text="File">
+         <MenuItem mnemonicParsing="false" onAction="#saveImage" text="Save"/>
+         <MenuItem mnemonicParsing="false" onAction="#saveImageAs" text="Save As…"/>
+         <MenuItem mnemonicParsing="false" onAction="#revert" text="Revert"/>
+         <SeparatorMenuItem mnemonicParsing="false"/>
+         <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit"/>
+      </Menu>
+      <Menu mnemonicParsing="false" text="Help">
+         <MenuItem mnemonicParsing="false" text="Over AnimoFx8"/>
+      </Menu>
+   </MenuBar>
+   <Canvas fx:id="editCanvas" layoutY="25.0" onMouseClicked="#mouseClicked" onMouseEntered="#dragEntered"
+           onMouseExited="#dragExited" onMousePressed="#mousePressed" onMouseReleased="#mouseReleased"/>
 </Pane>

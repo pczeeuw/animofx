@@ -1,7 +1,6 @@
 package nl.pczeeuw.animofx8.services;
 
 import javafx.embed.swing.SwingFXUtils;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import lombok.extern.slf4j.Slf4j;

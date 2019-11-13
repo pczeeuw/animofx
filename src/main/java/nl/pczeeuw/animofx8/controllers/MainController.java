@@ -1,10 +1,8 @@
 package nl.pczeeuw.animofx8.controllers;
 
-import de.felixroske.jfxsupport.FXMLController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -16,7 +14,6 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lombok.extern.slf4j.Slf4j;
@@ -24,13 +21,14 @@ import nl.pczeeuw.animofx8.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-@FXMLController
 @Slf4j
+@Component
 public class MainController {
 
 
@@ -115,31 +113,6 @@ public class MainController {
         imgView.setImage(wImg);
 
     }
-
-//    public void drawDragDetected(MouseEvent mouseEvent) {
-//
-//    }
-//
-//    public void dropFileEnter(MouseDragEvent mouseDragEvent) {
-//        dropPane.setCursor(Cursor.CLOSED_HAND);
-//        dropPane.setStyle("-fx-background-color: #a2ddf5");
-//    }
-//
-//    public void dropFileExit(MouseDragEvent mouseDragEvent) {
-//        dropPane.setCursor(Cursor.CLOSED_HAND);
-//        dropPane.setStyle("-fx-background-color: #a2ddf5");
-//    }
-//
-//    public void dropFileOver(MouseDragEvent mouseDragEvent) {
-//        dropPane.setCursor(Cursor.CLOSED_HAND);
-//        dropPane.setStyle("-fx-background-color: #a2ddf5");
-//    }
-//
-//    public void dropFileRelease(MouseDragEvent mouseDragEvent) {
-//        dropPane.setCursor(Cursor.CLOSED_HAND);
-//        dropPane.setStyle("-fx-background-color: #a2ddf5");
-//    }
-
     public void dropFileDetected(MouseEvent mouseEvent) {
         log.info("detected");
     }
@@ -189,7 +162,6 @@ public class MainController {
             EditorController controller = loader.getController();
 
             Image image = imageService.fileToImage(file);
-//            image = imageService.scaleImage(image, Screen.getPrimary().getVisualBounds());
             if (image != null) {
                 controller.initPage(scene, image, file.getAbsolutePath());
                 stage.setTitle(file.getName());
