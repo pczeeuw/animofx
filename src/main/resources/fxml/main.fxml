@@ -1,19 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.pczeeuw.animofx8.controllers.MainController">
-    <children>
-        <Label fx:id="helloLabel" layoutX="99.0" layoutY="109.0" prefHeight="34.0" prefWidth="394.0" text="Hello World!">
-            <font>
-                <Font size="26.0" />
-            </font>
-        </Label>
-        <TextField fx:id="nameField" layoutX="99.0" layoutY="162.0" prefHeight="26.0" prefWidth="234.0" />
-        <Button fx:id="helloButton" layoutX="347.0" layoutY="162.0" mnemonicParsing="false" onAction="#setHelloText" text="Button" />
-    </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="nl.pczeeuw.animofx8.controllers.MainController">
+   <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+      <Menu mnemonicParsing="false" text="File">
+         <MenuItem mnemonicParsing="false" text="New"/>
+         <MenuItem mnemonicParsing="false" onAction="#openImage" text="Open…"/>
+         <Menu mnemonicParsing="false" text="Open Recent"/>
+         <SeparatorMenuItem mnemonicParsing="false"/>
+         <MenuItem mnemonicParsing="false" text="Close"/>
+         <MenuItem mnemonicParsing="false" text="Save"/>
+         <MenuItem mnemonicParsing="false" text="Save As…"/>
+         <MenuItem mnemonicParsing="false" text="Revert"/>
+         <SeparatorMenuItem mnemonicParsing="false"/>
+         <MenuItem mnemonicParsing="false" text="Preferences…"/>
+         <SeparatorMenuItem mnemonicParsing="false"/>
+         <MenuItem mnemonicParsing="false" text="Quit"/>
+      </Menu>
+      <Menu mnemonicParsing="false" text="Edit">
+         <MenuItem mnemonicParsing="false" text="Undo"/>
+         <MenuItem mnemonicParsing="false" text="Redo"/>
+         <SeparatorMenuItem mnemonicParsing="false"/>
+         <MenuItem mnemonicParsing="false" text="Cut"/>
+         <MenuItem mnemonicParsing="false" text="Copy"/>
+         <MenuItem mnemonicParsing="false" text="Paste"/>
+         <MenuItem mnemonicParsing="false" text="Delete"/>
+         <SeparatorMenuItem mnemonicParsing="false"/>
+         <MenuItem mnemonicParsing="false" text="Select All"/>
+         <MenuItem mnemonicParsing="false" text="Unselect All"/>
+      </Menu>
+      <Menu mnemonicParsing="false" text="Help">
+         <MenuItem mnemonicParsing="false" text="About MyHelloApp"/>
+      </Menu>
+   </MenuBar>
+   <Pane fx:id="dropPane" layoutX="14.0" layoutY="68.0" onDragDetected="#dropFileDetected" onDragDone="#dropFileDone"
+         onDragDropped="#dropFileDropped" onDragEntered="#dropFileEnter" onDragExited="#dropFileExit"
+         onDragOver="#dropFileOver" prefHeight="264.0" prefWidth="573.0">
+      <Label layoutX="248.0" layoutY="124.0" text="Drag and drop"/>
+   </Pane>
+   <Label fx:id="errorLabel" layoutY="359.0"/>
 </Pane>

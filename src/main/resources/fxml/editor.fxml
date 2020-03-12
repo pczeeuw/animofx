@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="editorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="nl.pczeeuw.animofx8.controllers.EditorController">
+   <ImageView fx:id="imgView" layoutY="25.0" pickOnBounds="true" preserveRatio="true"/>
+   <MenuBar fx:id="menuBar">
+      <Menu mnemonicParsing="false" text="File">
+         <MenuItem mnemonicParsing="false" onAction="#saveImage" text="Save"/>
+         <MenuItem mnemonicParsing="false" onAction="#saveImageAs" text="Save As…"/>
+         <MenuItem mnemonicParsing="false" onAction="#revert" text="Revert"/>
+         <SeparatorMenuItem mnemonicParsing="false"/>
+         <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit"/>
+      </Menu>
+      <Menu mnemonicParsing="false" text="Help">
+         <MenuItem mnemonicParsing="false" text="Over AnimoFx8"/>
+      </Menu>
+   </MenuBar>
+   <Canvas fx:id="editCanvas" layoutY="25.0" onMouseClicked="#mouseClicked" onMouseEntered="#dragEntered"
+           onMouseExited="#dragExited" onMousePressed="#mousePressed" onMouseReleased="#mouseReleased"/>
+</Pane>
